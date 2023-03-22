@@ -10,7 +10,11 @@
       <ul class="flex items-center font-medium
         whitespace-nowrap overflow-x-auto overflow-y-hidden">
         {{ range .Site.Menus.main }}
-        <li class="ml-2 mr-2"><a href="{{ .URL | relLangURL }}">{{ T .Identifier | default .Name }}</a></li>
+          {{ if .Params.targetBlank }}
+            <li class="ml-2 mr-2"><a target="_blank" href="{{ .URL | relLangURL }}">{{ T .Identifier | default .Name }}</a></li>
+          {{ else }}
+            <li class="ml-2 mr-2"><a href="{{ .URL | relLangURL }}">{{ T .Identifier | default .Name }}</a></li>
+          {{ end }}
         {{ end }}
       </ul>
       <ul class="flex item-center text-sm font-bold">
