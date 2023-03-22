@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" site.Params.mainSections) }}
 <main class="container mx-auto">
   <h2 class="mt-8 text-3xl font-bold">{{ .Site.Params.greet }}</h2>
   <p class="mt-0 mb-0">{{ .Site.Author.status }}</p>
@@ -9,9 +10,8 @@
   <h3 class="mt-6 mb-4 text-2xl font-bold">{{ T "older" }}</h3>
   {{ end }}
   <div>
-    {{ $paginator := .Paginate (where .Site.RegularPages "Kind" "page") }}
     {{ range $paginator.Pages }}
-    {{ partial "item.html" . }}
+      {{ partial "item.html" . }}
     {{ end }}
     {{ partial "paginator.html" . }}
   </div>
